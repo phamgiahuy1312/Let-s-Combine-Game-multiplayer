@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour
     private PlayerController nearestPlayer;
     private Score score;
 
+    private bool isFrozen = false;
     private void Start()
     {
         view = GetComponent<PhotonView>();
@@ -40,6 +41,8 @@ public class Monster : MonoBehaviour
 
     private void Update()
     {
+        if (isFrozen) return;
+
         if (players.Length < 2)
             return; // Không đủ người chơi, không cần tiếp tục
 
@@ -53,6 +56,12 @@ public class Monster : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, nearestPlayer.transform.position, speed * Time.deltaTime);
             animator.SetFloat("speed", speed);
         }
+    }
+
+    // Set monster frozen state
+    public void SetFrozen(bool frozen)
+    {
+        isFrozen = frozen;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

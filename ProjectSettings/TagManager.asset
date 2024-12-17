@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Monster
   - Line
+  - IgnoreTheme
+  - Button
+  - Audio
   layers:
   - Default
   - TransparentFX

@@ -30,7 +30,9 @@ public class Health : MonoBehaviour
     {
         PlayerStats.health--;
         if (PlayerStats.health <= 0)
-        {           
+        {
+            Time.timeScale = 0;
+            PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate = 0.01f;
             gameOver.SetActive(true);
             
         }

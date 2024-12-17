@@ -71,6 +71,7 @@ public class PlayerController : MonoBehaviour
                 if (isFacingRight && Input.GetAxisRaw("Horizontal") < 0 || !isFacingRight && Input.GetAxisRaw("Horizontal") > 0)
                 {
                     Flip();
+                    view.RPC("SyncFlip", RpcTarget.All, isFacingRight);
                 }
 
                 rend.SetPosition(0, transform.position);
@@ -81,10 +82,10 @@ public class PlayerController : MonoBehaviour
             rend.SetPosition(1, transform.position);
         }
 
-        
-
-
     }
+
+    //check if player out room, other player will back to level main
+
 
     void Flip()
     {
@@ -148,4 +149,24 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetFloat("speed", speed);
     }
+
+    [PunRPC]
+    private void SyncFlip(bool flip)
+    {
+        isFacingRight = flip;
+
+        // Ensure the local scale matches the desired direction
+        Vector3 localScale = transform.localScale;
+        if ((isFacingRight && localScale.x < 0) || (!isFacingRight && localScale.x > 0))
+        {
+            localScale.x *= -1;
+            transform.localScale = localScale;
+
+            // Flip the name display scale to match
+            Vector3 nameDisplayScale = nameDisplay.rectTransform.localScale;
+            nameDisplayScale.x *= -1;
+            nameDisplay.rectTransform.localScale = nameDisplayScale;
+        }
+    }
+
 }

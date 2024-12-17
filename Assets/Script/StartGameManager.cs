@@ -10,7 +10,13 @@ public class StartGameManager : MonoBehaviourPunCallbacks
     public Text WaitingHostStart;
     public Button chatBoxButton;
     public Button closeChatBoxBtn;
-    private void Start()
+
+    AudioManagers audioManager;
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagers>();
+    } 
+        private void Start()
     {
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -27,17 +33,24 @@ public class StartGameManager : MonoBehaviourPunCallbacks
     public void OnStartButtonClicked()
     {
         // Gửi RPC 
-        BoxChat.SetActive(false);
-        chatBoxButton.gameObject.SetActive(false);
-        photonView.RPC("StartGame", RpcTarget.All);
+        audioManager.PlaySFX(audioManager.Touch);
+        //check room have 2 player
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            BoxChat.SetActive(false);
+            chatBoxButton.gameObject.SetActive(false);
+            photonView.RPC("StartGame", RpcTarget.All);
+        }
     }
 
     public void OnClickchatBoxButton()
     {
+        audioManager.PlaySFX(audioManager.Touch);
         BoxChat.SetActive(true);
     }
     public void OnClickCloseChatBoxButton()
-    {
+    {   
+        audioManager.PlaySFX(audioManager.Touch);
         BoxChat.SetActive(false);
     }
 

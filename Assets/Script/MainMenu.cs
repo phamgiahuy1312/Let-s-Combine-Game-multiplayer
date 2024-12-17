@@ -9,9 +9,19 @@ public class MainMenu : MonoBehaviourPunCallbacks
     public InputField joinInput;
     //[SerializeField] GameObject panel;
     [SerializeField] GameObject highScorePanel;
+    [SerializeField] GameObject SettingPanel;
+    [SerializeField] GameObject listRoomPanel;
     public InputField nameInput;
     private string roomName;
-    // Gọi hàm này khi thay đổi tên người chơi
+    private string RoomNameCreate;
+    AudioManagers audioManager;
+
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManagers>();
+    } 
+        // Gọi hàm này khi thay đổi tên người chơi
     public void ChangeName()
     {
         PhotonNetwork.NickName = nameInput.text;
@@ -20,6 +30,12 @@ public class MainMenu : MonoBehaviourPunCallbacks
     // Gọi hàm này khi muốn tạo phòng mới
     public void CreateRoom()
     {
+        audioManager.PlaySFX(audioManager.Touch);
+        if (string.IsNullOrEmpty(createInput.text))
+        {
+            Debug.LogError("Room name is null or empty");
+            return;
+        }
         // Kiểm tra xem đã rời khỏi phòng (nếu đang ở trong phòng) và lobby chưa
         if (PhotonNetwork.InRoom)
         {
@@ -45,6 +61,13 @@ public class MainMenu : MonoBehaviourPunCallbacks
     // Gọi hàm này khi muốn tham gia vào phòng
     public void JoinRoom()
     {
+        audioManager.PlaySFX(audioManager.Touch);
+        if (string.IsNullOrEmpty(joinInput.text))
+        {
+            Debug.LogError("Room name is null or empty");
+            return;
+        }
+
         // Kiểm tra xem đã rời khỏi phòng (nếu đang ở trong phòng) và lobby chưa
         if (PhotonNetwork.InRoom)
         {
@@ -82,12 +105,33 @@ public class MainMenu : MonoBehaviourPunCallbacks
     // Gọi khi người chơi nhấn vào nút HighScore
     public void OnClickHighScore()
     {
+        audioManager.PlaySFX(audioManager.Touch);
         highScorePanel.SetActive(true);
     }
 
     // Gọi khi người chơi nhấn vào nút ClosePanel
     public void OnClickClosePanel()
     {
+        audioManager.PlaySFX(audioManager.Touch);
         highScorePanel.SetActive(false);
     }
+
+    public void OpenSetting()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        SettingPanel.SetActive(true);
+    }
+
+    public void OpenListRoom()
+    { 
+        audioManager.PlaySFX(audioManager.Touch);
+        listRoomPanel.SetActive(true);
+
+    }
+    public void CloseListRoom()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        listRoomPanel.SetActive(false);
+    }
+
 }

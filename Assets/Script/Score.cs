@@ -37,6 +37,7 @@ public class Score : MonoBehaviour
 
         if (PlayerStats.score == 15)
         {
+            
                 PhotonNetwork.LoadLevel("GameLevel2");
 
         }
