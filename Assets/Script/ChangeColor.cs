@@ -2,7 +2,7 @@
 using UnityEngine;
 using Photon.Pun;
 
-public class ChangeColor : MonoBehaviourPunCallbacks
+public class ChangeColors : MonoBehaviourPunCallbacks
 {
     private SpriteRenderer rend;
     private Color chosenColor;

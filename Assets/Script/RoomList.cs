@@ -8,11 +8,12 @@ using UnityEngine.UI;
 public class RoomList : MonoBehaviourPunCallbacks
 {
     public static RoomList Instance;
+    
     [Header("UI")] public Transform roomListParent;
     public GameObject roomListItemPrefab;
     [Header("UI")] public Transform roomListParent1;
     public GameObject roomListItemPrefab1;
-
+   
     public GameObject mainMenuObject;
     public MainMenu MainMenu;
 

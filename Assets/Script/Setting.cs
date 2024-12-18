@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Compression;
+using Unity.Collections;
 using UnityEngine;
 
 public class Setting : MonoBehaviour
@@ -88,13 +90,7 @@ public class Setting : MonoBehaviour
         PlayerPrefs.SetInt("Music", switchStateMusic);
         PlayerPrefs.SetInt("SFX", switchStateSFX);
         PlayerPrefs.Save();
-        print("Save Setting");
     }
 
-    public void CloseSetting()
-    {
-        audioManager.PlaySFX(audioManager.Touch);
-        Settingpanel.SetActive(false);
-        print("Close Setting");
-    }
+
 }

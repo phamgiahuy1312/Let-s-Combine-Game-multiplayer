@@ -77,8 +77,10 @@ public class GameOver : MonoBehaviourPunCallbacks
     [PunRPC]
     void SaveAndReturnToMenu()
     {
+
         Time.timeScale = 1;
         PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate = 1f;
+        PhotonNetwork.LeaveRoom();
         string filePath = Path.Combine(Application.streamingAssetsPath, "highscores.json");
 
         // Đọc dữ liệu hiện có từ tệp JSON nếu có
