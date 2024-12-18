@@ -11,6 +11,8 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] GameObject highScorePanel;
     [SerializeField] GameObject SettingPanel;
     [SerializeField] GameObject listRoomPanel;
+
+    [SerializeField] GameObject quitGamePanel;
     public InputField nameInput;
     public InputField nameInputTemp;
     private string roomName;
@@ -110,42 +112,91 @@ public class MainMenu : MonoBehaviourPunCallbacks
         Debug.LogWarningFormat("Disconnected from Master Server. Reason: {0}", cause);
     }
 
+    
 
 
 
 
 
 
-    // Gọi khi người chơi nhấn vào nút HighScore
+//*********** ON OFF HIGHSCORE PANEL ***********//
     public void OnClickHighScore()
     {
         audioManager.PlaySFX(audioManager.Touch);
         highScorePanel.SetActive(true);
     }
 
-    // Gọi khi người chơi nhấn vào nút ClosePanel
     public void OnClickClosePanel()
     {
         audioManager.PlaySFX(audioManager.Touch);
         highScorePanel.SetActive(false);
     }
+//***********************************************//
 
+//*********** ON OFF SETTING PANEL ***********//
     public void OpenSetting()
     {
         audioManager.PlaySFX(audioManager.Touch);
         SettingPanel.SetActive(true);
+        AnimationUI_IN(SettingPanel,0,0,0);
+
     }
+    public void CloseSetting()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        AnimationUI_OUT(SettingPanel,0,1000,0);
+    }
+//***********************************************//
+
+//*********** ON OFF LIST ROOM PANEL ***********//
 
     public void OpenListRoom()
     { 
         audioManager.PlaySFX(audioManager.Touch);
         listRoomPanel.SetActive(true);
+        AnimationUI_IN(listRoomPanel,0,0,0);
 
     }
     public void CloseListRoom()
     {
         audioManager.PlaySFX(audioManager.Touch);
-        listRoomPanel.SetActive(false);
+        AnimationUI_OUT(listRoomPanel,0,1000,0);
     }
+ //***********************************************//
+
+ //*********** ON OFF QUIT GAME PANEL ***********//
+    public void OpenQuitGame()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        quitGamePanel.SetActive(true);
+        AnimationUI_IN(quitGamePanel,0,0,0);
+
+    }
+    public void CloseQuitGame()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        AnimationUI_OUT(quitGamePanel,0,1000,0);
+    }
+//***********************************************//
+    public void QuitGame()
+    {
+        audioManager.PlaySFX(audioManager.Touch);
+        Application.Quit();
+    }
+
+
+
+
+    private void AnimationUI_OUT(GameObject Panel,int x,int y,int z){
+        LeanTween.moveLocal(Panel, new Vector3(x,y,z),1f).setEase(LeanTweenType.easeInBack);
+
+    }
+
+     private void AnimationUI_IN(GameObject Panel,int x,int y,int z){
+        LeanTween.moveLocal(Panel, new Vector3(x,y,z),1f).setEase(LeanTweenType.easeOutBack);
+
+    }
+
+
 
 }

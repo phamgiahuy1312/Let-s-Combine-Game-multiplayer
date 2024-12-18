@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: 84e58eac-915b-4173-bd1a-c43ac772b456
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: 08dc492c-9efb-4513-acf9-d5b7976049fd
     AppVersion: 
     UseNameServer: 1
     FixedRegion: 
@@ -24,7 +24,7 @@ MonoBehaviour:
     Port: 0
     ProxyServer: 
     Protocol: 0
-    EnableProtocolFallback: 0
+    EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
@@ -34,39 +34,27 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - CantHearYou
+  - ChangeColour
   - ClickRpc
   - DestroyRpc
+  - HeresWhy
+  - AddScoreRPC
   - DestroySpaceship
   - Fire
-  - RespawnSpaceship
-  - TakeDamageRPC
-  - AddScoreRPC
-  - Restart
-  - SpawnParticle
-  - ReturnToMenu
-  - SaveandReturnToMenu
-  - SaveAndReturnToMenu
-  - SyncColor
-  - PauseGameForOtherPlayer
-  - ResumeGameForOtherPlayer
-  - ExitGame
-  - PauseGame
-  - ResumeGame
-  - PauseGameForOtherPlayerFromClient
-  - ResumeGameForOtherPlayerFromClient
-  - Continute
-  - showDeathFX
-  - SyncAnimation
   - GetMessage
-  - ReceiveMessage
-  - ChangeMonsterSpeed
-  - LevelUpRPC
-  - StartGame
-  - SyncFlip
-  - SyncPauseState
-  - BackToMenu
-  - OnPlayerPressedEsc
   - OnExitGame
+  - OnPlayerPressedEsc
+  - RespawnSpaceship
+  - Restart
+  - SaveAndReturnToMenu
+  - showDeathFX
+  - SpawnParticle
+  - StartGame
+  - SyncAnimation
+  - SyncColor
+  - SyncFlip
+  - TakeDamageRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
