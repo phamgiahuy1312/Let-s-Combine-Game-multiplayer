@@ -13,6 +13,9 @@ public class RoomList : MonoBehaviourPunCallbacks
     [Header("UI")] public Transform roomListParent1;
     public GameObject roomListItemPrefab1;
 
+    public GameObject mainMenuObject;
+    public MainMenu MainMenu;
+
     private List<RoomInfo> cachedRoomList = new List<RoomInfo>();
 
     private void Awake()
@@ -34,8 +37,6 @@ public class RoomList : MonoBehaviourPunCallbacks
             PhotonNetwork.Disconnect();
             yield return new WaitUntil(() => !PhotonNetwork.IsConnected);
         }
-
-        print("Reconnecting...");
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -43,7 +44,7 @@ public class RoomList : MonoBehaviourPunCallbacks
     {
         base.OnConnectedToMaster();
 
-        PhotonNetwork.JoinLobby();
+        // PhotonNetwork.JoinLobby();
     }
 
 
@@ -74,7 +75,6 @@ public class RoomList : MonoBehaviourPunCallbacks
         }
 
         UpdateUI();
-        print("Room list updated!");
     }
 
 
@@ -97,7 +97,6 @@ public class RoomList : MonoBehaviourPunCallbacks
 
             roomItem.GetComponent<RoomItemButton>().roomName = room.Name;
 
-            // Assign the room name to the RoomItemButton script
             RoomItemButton buttonScript = roomItem.GetComponent<RoomItemButton>();
             buttonScript.roomName = room.Name;
 
@@ -105,10 +104,9 @@ public class RoomList : MonoBehaviourPunCallbacks
     }
     
 
-    public void JoinRoom(string _roomName)
+    public void clickRoomItem(string _roomName)
     {
-        PhotonNetwork.JoinRoom(_roomName);
+        MainMenu.RoomNameJoin = _roomName;
+        mainMenuObject.SetActive(true);
     }
-
-
 }

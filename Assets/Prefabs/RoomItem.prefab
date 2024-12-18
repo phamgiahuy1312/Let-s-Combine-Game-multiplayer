@@ -283,7 +283,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3175040548670830683}
         m_TargetAssemblyTypeName: RoomItemButton, Assembly-CSharp
-        m_MethodName: OnButtonPressed
+        m_MethodName: JoinRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -305,5 +305,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c140e655a2154da4c88958b315125f2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RoomName: 
-  inputName_PanelPrefab: {fileID: 1006914581438174600, guid: 9ac1a10768f7ed7459f12d88dc1bc850, type: 3}
+  roomName: 

@@ -15,6 +15,6 @@ public class JoinRoom_List : MonoBehaviour
     }
 
     Debug.Log("Trying to join room: " + roomName);
-    RoomList.Instance.JoinRoom(roomName);
+    RoomList.Instance.clickRoomItem(roomName);
     }
 }

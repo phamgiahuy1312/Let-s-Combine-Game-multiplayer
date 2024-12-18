@@ -12,8 +12,9 @@ public class MainMenu : MonoBehaviourPunCallbacks
     [SerializeField] GameObject SettingPanel;
     [SerializeField] GameObject listRoomPanel;
     public InputField nameInput;
+    public InputField nameInputTemp;
     private string roomName;
-    private string RoomNameCreate;
+    public string RoomNameJoin = "RoomName";
     AudioManagers audioManager;
 
 
@@ -25,6 +26,10 @@ public class MainMenu : MonoBehaviourPunCallbacks
     public void ChangeName()
     {
         PhotonNetwork.NickName = nameInput.text;
+    }
+
+    public void ChangeNameTemp(){
+        PhotonNetwork.NickName = nameInputTemp.text;
     }
 
     // Gọi hàm này khi muốn tạo phòng mới
@@ -51,6 +56,7 @@ public class MainMenu : MonoBehaviourPunCallbacks
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 2;
             PhotonNetwork.CreateRoom(createInput.text, roomOptions);
+
         }
         else
         {
@@ -61,33 +67,35 @@ public class MainMenu : MonoBehaviourPunCallbacks
     // Gọi hàm này khi muốn tham gia vào phòng
     public void JoinRoom()
     {
+        print("test");
         audioManager.PlaySFX(audioManager.Touch);
-        if (string.IsNullOrEmpty(joinInput.text))
+        if(!string.IsNullOrEmpty(joinInput.text))
         {
-            Debug.LogError("Room name is null or empty");
-            return;
+            RoomNameJoin = joinInput.text;
         }
-
-        // Kiểm tra xem đã rời khỏi phòng (nếu đang ở trong phòng) và lobby chưa
+        // check out room or lobby
         if (PhotonNetwork.InRoom)
         {
             PhotonNetwork.LeaveRoom();
         }
-        else if (PhotonNetwork.InLobby)
-        {
-            PhotonNetwork.LeaveLobby();
-        }
+        // else if (PhotonNetwork.InLobby)
+        // {
+        //     PhotonNetwork.LeaveLobby();
+        // }
         else
         {
-            PhotonNetwork.JoinRoom(joinInput.text);
+            // RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 }; // Set room options
+            PhotonNetwork.JoinRoom(RoomNameJoin); 
+            print("Join room by name" + RoomNameJoin);
         }
     }
 
     // Gọi khi đã tham gia vào phòng thành công
     public override void OnJoinedRoom()
     {
-        roomName = PhotonNetwork.CurrentRoom.Name;
+        PhotonNetwork.IsMessageQueueRunning = false;
         PhotonNetwork.LoadLevel("Game");
+
     }
 
     // Gọi khi kết nối đến Master Server thành công
@@ -101,6 +109,12 @@ public class MainMenu : MonoBehaviourPunCallbacks
     {
         Debug.LogWarningFormat("Disconnected from Master Server. Reason: {0}", cause);
     }
+
+
+
+
+
+
 
     // Gọi khi người chơi nhấn vào nút HighScore
     public void OnClickHighScore()
